@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak & Booking - Jadi Tenang Wedding Organizer</title>
+    <meta name="description" content="Hubungi Jadi Tenang Wedding Organizer. Konsultasi gratis, booking paket, atau kirim pesan langsung ke tim kami.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Page Header dengan Video Background */
+        .page-header {
+            position: relative;
+            padding: 8rem 0 4rem;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 1;
+        }
+
+        .page-header .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .page-header h1 span {
+            color: var(--secondary);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            color: white;
+        }
+        
+        .contact-section {
+            padding: 5rem 0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .contact-info h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info h2 span {
+            color: var(--primary);
+        }
+        
+        .contact-info > p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .info-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--off-white);
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+        
+        .info-item:hover {
+            transform: translateX(5px);
+            background: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .info-item i {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-top: 0.2rem;
+        }
+        
+        .info-item h4 {
+            margin-bottom: 0.3rem;
+            color: var(--primary);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .info-item p {
+            color: var(--gray);
+            margin: 0;
+        }
+        
+        .contact-form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(45, 106, 79, 0.1);
+        }
+        
+        .contact-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
+        }
+        
+        .map-section {
+            padding: 0 0 5rem;
+        }
+        
+        .map-wrapper {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .map-wrapper iframe {
+            width: 100%;
+            height: 400px;
+            border: 0;
+        }
+        
+        .contact-social {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .contact-social a {
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .contact-social a:hover {
+            transform: translateY(-3px);
+            background: var(--primary-dark);
+        }
+        
+        .faq-contact {
+            padding: 5rem 0;
+            background: var(--off-white);
+        }
+        
+        .faq-contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .faq-contact-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .faq-contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .faq-contact-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .faq-contact-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .faq-contact-card p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+        
+        .btn-link {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .btn-link:hover {
+            color: var(--primary-dark);
+            transform: translateX(5px);
+        }
+        
+        .btn-link i {
+            font-size: 0.8rem;
+            margin-left: 0.3rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 10px;
+            width: 100%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--white);
+        }
+        
+        .cta-section .btn-outline {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border: 2px solid white;
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: var(--transition);
+            background: transparent;
+        }
+        
+        .cta-section .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title span {
+            color: var(--primary);
+        }
+        
+        .logo-img {
+            height: 70px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+        
+        @media (max-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .contact-section {
+                padding: 3rem 0;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .page-header p {
+                font-size: 1rem;
+            }
+            .logo-img {
+                height: 45px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            .logo-img {
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <a href="index.html">
+                <img src="asset/logo2.png" alt="Jadi Tenang Wedding Organizer" class="logo-img">
+            </a>
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="about.html">Tentang</a></li>
+            <li><a href="packages.html">Paket</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html" class="active">Kontak</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Page Header dengan Video Background -->
+<section class="page-header">
+    <video class="header-video" autoplay loop muted playsinline>
+        <source src="asset/video/dekorasi.mp4" type="video/mp4">
+    </video>
+    <div class="header-overlay"></div>
+    <div class="container">
+        <h1 data-aos="fade-up">Hubungi <span>Kami</span></h1>
+        <p data-aos="fade-up" data-aos-delay="100">Siap membantu mewujudkan pernikahan impian Anda</p>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-grid">
+            <!-- Left Side - Contact Info -->
+            <div class="contact-info" data-aos="fade-right">
+                <h2>Konsultasi <span>Gratis</span></h2>
+                <p>Tim kami siap mendengar rencana pernikahan Anda dan memberikan saran terbaik. Tidak ada kewajiban apapun!</p>
+                
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <h4>Telepon / WhatsApp</h4>
+                        <p>+62 812 3456 7890</p>
+                        <p>+62 878 1234 5678</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Email</h4>
+                        <p>hello@jaditenang.com</p>
+                        <p>booking@jaditenang.com</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Kantor Pusat</h4>
+                        <p>Jl. Kebahagiaan No. 123, <br>Jakarta Selatan 12120</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Jam Operasional</h4>
+                        <p>Senin - Sabtu: 09.00 - 18.00</p>
+                        <p>Minggu: Konsultasi via WhatsApp</p>
+                    </div>
+                </div>
+                
+                <div class="contact-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            
+            <!-- Right Side - Contact Form -->
+            <div class="contact-form" data-aos="fade-left">
+                <h3>Kirim Pesan <span style="color: var(--primary);">Sekarang</span></h3>
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="name" placeholder="Nama Lengkap *" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="Email *" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="tel" id="phone" placeholder="Nomor WhatsApp *" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="date" id="weddingDate" placeholder="Tanggal Pernikahan">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <select id="package">
+                            <option value="">Pilih Paket yang diminati (opsional)</option>
+                            <option>Silver Package (Rp 25.000.000)</option>
+                            <option>Gold Package (Rp 45.000.000)</option>
+                            <option>Platinum Package (Rp 75.000.000)</option>
+                            <option>Custom Package (Sesuaikan budget)</option>
+                            <option>Masih bingung, mau konsultasi dulu</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" rows="5" placeholder="Ceritakan rencana pernikahan Anda... *" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-paper-plane"></i> Kirim Pesan
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="map-section">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Lokasi <span>Kami</span></h2>
+        <div class="map-wrapper" data-aos="fade-up" data-aos-delay="100">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.546264545126!2d106.90661601096107!3d-6.452245193512226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ebc44f720d89%3A0x241f9abef35f909f!2sJadi%20tenang%20wedding%20organizer!5e0!3m2!1sid!2sid!4v1776060389873!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Contact Section -->
+<section class="faq-contact">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Pertanyaan <span>Lainnya?</span></h2>
+        <div class="faq-contact-grid" data-aos="fade-up" data-aos-delay="100">
+            <div class="faq-contact-card">
+                <i class="fas fa-question-circle"></i>
+                <h3>FAQ Lengkap</h3>
+                <p>Masih ada pertanyaan? Kunjungi halaman FAQ kami</p>
+                <a href="#" class="btn-link">Lihat FAQ <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="faq-contact-card">
+                <i class="fab fa-instagram"></i>
+                <h3>Instagram</h3>
+                <p>Lihat portfolio terbaru kami di Instagram</p>
+                <a href="#" class="btn-link">@jaditenang.wo <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="faq-contact-card">
+                <i class="fab fa-whatsapp"></i>
+                <h3>WhatsApp Fast Response</h3>
+                <p>Balas dalam < 1 jam di hari kerja</p>
+                <a href="https://wa.me/6281234567890" class="btn-link">Chat Sekarang <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<div class="cta-section">
+    <div class="container">
+        <h2 data-aos="zoom-in">Siap Memulai Persiapan?</h2>
+        <p data-aos="zoom-in" data-aos-delay="100">Yuk konsultasi gratis dulu, tidak ada kewajiban apapun!</p>
+        <a href="https://wa.me/6281234567890?text=Halo%20Jadi%20Tenang,%20saya%20ingin%20konsultasi%20tentang%20pernikahan" class="btn-outline" data-aos="zoom-in" data-aos-delay="200">
+            <i class="fab fa-whatsapp"></i> Chat WhatsApp Sekarang
+        </a>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Jadi Tenang</h4>
+                <p>Wedding organizer profesional yang siap mewujudkan hari spesial Anda tanpa stres. Lebih dari 500+ pasangan bahagia telah mempercayakan hari istimewa mereka kepada kami.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Kontak Kami</h4>
+                <p><i class="fas fa-phone"></i> +62 812 3456 7890</p>
+                <p><i class="fas fa-envelope"></i> hello@jaditenang.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Jl. Kebahagiaan No. 123</p>
+                <p>Jakarta Selatan 12120</p>
+            </div>
+            <div class="footer-section">
+                <h4>Jam Operasional</h4>
+                <p><i class="fas fa-clock"></i> Senin - Sabtu: 09.00 - 18.00</p>
+                <p><i class="fas fa-clock"></i> Minggu: Konsultasi via WA</p>
+                <p><i class="fas fa-calendar"></i> Hari libur nasional tetap buka</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="about.html">Tentang Kami</a></li>
+                    <li><a href="packages.html">Paket Pernikahan</a></li>
+                    <li><a href="portfolio.html">Galeri Portfolio</a></li>
+                    <li><a href="contact.html">Kontak & Booking</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Jadi Tenang Wedding Organizer. All Rights Reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                <a href="#" style="color: rgba(255,255,255,0.6);">Syarat & Ketentuan</a> | 
+                <a href="#" style="color: rgba(255,255,255,0.6);">Kebijakan Privasi</a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+<!-- WhatsApp Float Button -->
+<div class="whatsapp-float">
+    <a href="https://wa.link/kjbtgk" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+    // Initialize AOS
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        });
+    });
+
+    // Form submission handler
+    const contactForm = document.getElementById('contactForm');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const weddingDate = document.getElementById('weddingDate').value;
+            const package = document.getElementById('package').value;
+            const message = document.getElementById('message').value;
+            
+            // Format pesan WhatsApp
+            const whatsappMessage = `*📋 KONSULTASI PERNIKAHAN*%0A%0A👤 *Nama:* ${name}%0A📧 *Email:* ${email}%0A📱 *WhatsApp:* ${phone}%0A📅 *Tanggal Pernikahan:* ${weddingDate || '-'}%0A📦 *Paket Minat:* ${package || '-'}%0A💬 *Pesan:* ${message}%0A%0A_Silahkan hubungi customer untuk follow up._`;
+            
+            const whatsappUrl = `https://wa.me/6281234567890?text=${whatsappMessage}`;
+            
+            alert('Terima kasih ' + name + '! Tim Jadi Tenang akan segera menghubungi Anda dalam 1x24 jam.\n\nSalam hangat,\nTim Jadi Tenang Wedding Organizer');
+            
+            contactForm.reset();
+            
+            // Buka WhatsApp
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 500);
+        });
+    }
+
+    // Add hover effect for info items
+    const infoItems = document.querySelectorAll('.info-item');
+    infoItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            item.style.transform = 'translateX(8px)';
+        });
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = 'translateX(0)';
+        });
+    });
+</script>
+
+</body>
+</html>

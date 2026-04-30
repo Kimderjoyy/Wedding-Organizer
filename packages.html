@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Paket Pernikahan - Jadi Tenang Wedding Organizer</title>
+    <meta name="description" content="Pilih paket wedding organizer yang sesuai dengan budget Anda. Mulai dari Silver, Gold, hingga Platinum. Harga transparan dan terbaik.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Page Header dengan Video Background */
+        .page-header {
+            position: relative;
+            padding: 8rem 0 4rem;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 1;
+        }
+
+        .page-header .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .page-header h1 span {
+            color: var(--secondary);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            color: white;
+        }
+        
+        .packages-page {
+            padding: 5rem 0;
+        }
+        
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .package-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(45, 106, 79, 0.1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .package-card.featured {
+            border: 2px solid var(--secondary);
+            transform: scale(1.02);
+        }
+        
+        .package-card.featured:hover {
+            transform: scale(1.02) translateY(-10px);
+        }
+        
+        .package-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--secondary);
+            color: var(--primary-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .package-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .package-header h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .price small {
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
+        
+        .package-body {
+            padding: 1.2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .package-body ul {
+            list-style: none;
+            margin-bottom: 1.2rem;
+            flex: 1;
+        }
+        
+        .package-body li {
+            padding: 0.4rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-bottom: 1px solid rgba(45, 106, 79, 0.08);
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+        
+        .package-body li i {
+            color: var(--primary);
+            width: 18px;
+            font-size: 0.8rem;
+        }
+        
+        .package-body li.not-included i {
+            color: #dc3545;
+        }
+        
+        .btn-package {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 0.7rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        
+        .btn-package:hover {
+            background: var(--primary-dark);
+        }
+        
+        .comparison {
+            padding: 5rem 0;
+            background: var(--off-white);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title span {
+            color: var(--primary);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+        
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(45, 106, 79, 0.1);
+        }
+        
+        .comparison-table th {
+            background: var(--primary);
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .comparison-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+            background: var(--off-white);
+        }
+        
+        .comparison-table i.fa-check {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .faq {
+            padding: 5rem 0;
+        }
+        
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--white);
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(45, 106, 79, 0.1);
+        }
+        
+        .faq-question {
+            padding: 1.2rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+        
+        .faq-question i {
+            transition: var(--transition);
+            color: var(--primary);
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1.5rem;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 1.5rem 1.2rem;
+        }
+        
+        .faq-answer p {
+            color: var(--gray);
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--white);
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .btn-outline {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border: 2px solid var(--white);
+            border-radius: 50px;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+        
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .modal-content h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .modal-content h3 span {
+            color: var(--secondary);
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(45, 106, 79, 0.3);
+            border-radius: 10px;
+            font-family: inherit;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 10px;
+            width: 100%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Custom Alert */
+        #customAlert {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            z-index: 3000;
+            text-align: center;
+            max-width: 90%;
+            width: 320px;
+            animation: fadeInScale 0.3s ease;
+        }
+        
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        
+        #customAlert i {
+            font-size: 3rem;
+            color: #2d6a4f;
+            margin-bottom: 0.5rem;
+        }
+        
+        #customAlert h3 {
+            margin-bottom: 0.5rem;
+            color: #2d6a4f;
+            font-size: 1.3rem;
+        }
+        
+        #customAlert p {
+            margin-bottom: 1rem;
+            color: #555;
+            font-size: 0.9rem;
+        }
+        
+        #customAlert button {
+            background: #2d6a4f;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.8rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        /* Logo */
+        .logo-img {
+            height: 70px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+        
+        @media (max-width: 992px) {
+            .packages-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .packages-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .package-card.featured {
+                transform: scale(1);
+            }
+            .logo-img {
+                height: 45px;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .page-header p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            .logo-img {
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <a href="index.html">
+                <img src="asset/logo2.png" alt="Jadi Tenang Wedding Organizer" class="logo-img">
+            </a>
+        </div>
+        <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="about.html">Tentang</a></li>
+            <li><a href="packages.html" class="active">Paket</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Kontak</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Page Header dengan Video Background -->
+<section class="page-header">
+    <video class="header-video" autoplay loop muted playsinline>
+        <source src="asset/video/dekorasi.mp4" type="video/mp4">
+    </video>
+    <div class="header-overlay"></div>
+    <div class="container">
+        <h1 data-aos="fade-up">Paket <span>Pernikahan</span></h1>
+        <p data-aos="fade-up" data-aos-delay="100">Pilih paket yang sesuai dengan kebutuhan dan budget Anda</p>
+    </div>
+</section>
+
+<section class="packages-page">
+    <div class="container">
+        <div class="packages-grid">
+            <div class="package-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="package-badge">POPULER</div>
+                <div class="package-header">
+                    <h3>Silver</h3>
+                    <div class="price">Rp 25.000.000</div>
+                    <p>untuk 200 tamu</p>
+                </div>
+                <div class="package-body">
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Konsultasi & perencanaan 3x</li>
+                        <li><i class="fas fa-check-circle"></i> Dekorasi panggung sederhana</li>
+                        <li><i class="fas fa-check-circle"></i> Dokumentasi foto 4 jam</li>
+                        <li><i class="fas fa-check-circle"></i> MC profesional</li>
+                        <li><i class="fas fa-check-circle"></i> Sound system standar</li>
+                        <li><i class="fas fa-check-circle"></i> Undangan digital</li>
+                        <li><i class="fas fa-check-circle"></i> Koordinasi H-1</li>
+                        <li class="not-included"><i class="fas fa-times-circle"></i> Catering</li>
+                        <li class="not-included"><i class="fas fa-times-circle"></i> Souvenir</li>
+                    </ul>
+                    <button class="btn btn-package" onclick="openPackageModal('Silver')">Pilih Paket Ini</button>
+                </div>
+            </div>
+
+            <div class="package-card featured" data-aos="fade-up" data-aos-delay="300">
+                <div class="package-badge">BEST SELLER</div>
+                <div class="package-header">
+                    <h3>Gold</h3>
+                    <div class="price">Rp 45.000.000</div>
+                    <p>untuk 300 tamu</p>
+                </div>
+                <div class="package-body">
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Konsultasi & perencanaan 5x</li>
+                        <li><i class="fas fa-check-circle"></i> Dekorasi premium + backdrop</li>
+                        <li><i class="fas fa-check-circle"></i> Dokumentasi foto 8 jam</li>
+                        <li><i class="fas fa-check-circle"></i> Video highlight 3 menit</li>
+                        <li><i class="fas fa-check-circle"></i> MC + organ tunggal</li>
+                        <li><i class="fas fa-check-circle"></i> Sound system + lighting</li>
+                        <li><i class="fas fa-check-circle"></i> Undangan cetak (200 pcs)</li>
+                        <li><i class="fas fa-check-circle"></i> Souvenir (200 pcs)</li>
+                        <li><i class="fas fa-check-circle"></i> Koordinasi H-7 hingga H+1</li>
+                        <li class="not-included"><i class="fas fa-times-circle"></i> Catering</li>
+                    </ul>
+                    <button class="btn btn-package" onclick="openPackageModal('Gold')">Pilih Paket Ini</button>
+                </div>
+            </div>
+
+            <div class="package-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="package-header">
+                    <h3>Platinum</h3>
+                    <div class="price">Rp 75.000.000</div>
+                    <p>untuk 500 tamu</p>
+                </div>
+                <div class="package-body">
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Konsultasi unlimited</li>
+                        <li><i class="fas fa-check-circle"></i> Dekorasi mewah full venue</li>
+                        <li><i class="fas fa-check-circle"></i> Dokumentasi foto full day</li>
+                        <li><i class="fas fa-check-circle"></i> Video cinematic 5 menit + full movie</li>
+                        <li><i class="fas fa-check-circle"></i> Prewedding session</li>
+                        <li><i class="fas fa-check-circle"></i> Live band (5 pemain)</li>
+                        <li><i class="fas fa-check-circle"></i> Lighting + sound system premium</li>
+                        <li><i class="fas fa-check-circle"></i> Undangan cetak premium (500 pcs)</li>
+                        <li><i class="fas fa-check-circle"></i> Souvenir eksklusif (500 pcs)</li>
+                        <li><i class="fas fa-check-circle"></i> Koordinasi H-30 hingga H+3</li>
+                        <li><i class="fas fa-check-circle"></i> Catering prasmanan + hidangan</li>
+                    </ul>
+                    <button class="btn btn-package" onclick="openPackageModal('Platinum')">Pilih Paket Ini</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="comparison">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Bandingkan <span>Paket</span></h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Lihat perbedaan lengkap setiap paket</p>
+        <div class="table-wrapper" data-aos="fade-up" data-aos-delay="200">
+            <table class="comparison-table">
+                <thead>
+                    <tr><th>Fitur</th><th>Silver</th><th>Gold</th><th>Platinum</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Konsultasi</td><td>3x</td><td>5x</td><td>Unlimited</td></tr>
+                    <tr><td>Dekorasi</td><td>Sederhana</td><td>Premium</td><td>Mewah Full Venue</td></tr>
+                    <tr><td>Dokumentasi Foto</td><td>4 jam</td><td>8 jam</td><td>Full day</td></tr>
+                    <tr><td>Video</td><td>-</td><td>Highlight 3 menit</td><td>Cinematic + Full movie</td></tr>
+                    <tr><td>Prewedding</td><td>-</td><td>-</td><td><i class="fas fa-check"></i></td></tr>
+                    <tr><td>Entertainment</td><td>MC saja</td><td>MC + Organ tunggal</td><td>Live band 5 pemain</td></tr>
+                    <tr><td>Undangan</td><td>Digital</td><td>Cetak 200</td><td>Cetak premium 500</td></tr>
+                    <tr><td>Souvenir</td><td>-</td><td>200 pcs</td><td>500 pcs eksklusif</td></tr>
+                    <tr><td>Catering</td><td>-</td><td>-</td><td><i class="fas fa-check"></i></td></tr>
+                    <tr><td>Koordinasi</td><td>H-1</td><td>H-7 s/d H+1</td><td>H-30 s/d H+3</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<section class="faq">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Pertanyaan <span>Umum</span></h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Yang sering ditanyakan seputar paket kami</p>
+        <div class="faq-grid">
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="faq-question"><h3>Apakah bisa custom paket?</h3><i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer"><p>Ya, kami menyediakan paket custom sesuai budget dan kebutuhan Anda.</p></div>
+            </div>
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="faq-question"><h3>Berapa DP yang harus dibayar?</h3><i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer"><p>DP sebesar 50% dari total paket untuk booking tanggal.</p></div>
+            </div>
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                <div class="faq-question"><h3>Apakah termasuk venue?</h3><i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer"><p>Paket kami belum termasuk venue. Tapi kami bisa membantu merekomendasikan venue.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="cta-section">
+    <div class="container">
+        <h2 data-aos="zoom-in">Butuh Paket Custom?</h2>
+        <p data-aos="zoom-in" data-aos-delay="100">Hubungi kami untuk konsultasi gratis!</p>
+        <a href="contact.html" class="btn btn-outline" data-aos="zoom-in" data-aos-delay="200">Konsultasi Sekarang</a>
+    </div>
+</div>
+
+<!-- Modal Booking -->
+<div id="packageModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closePackageModal()">&times;</span>
+        <h3>Booking Paket <span id="selectedPackage"></span></h3>
+        <form id="packageBookingForm" onsubmit="sendBooking(event)">
+            <div class="form-group"><input type="text" id="fullName" placeholder="Nama Lengkap" required></div>
+            <div class="form-group"><input type="email" id="email" placeholder="Email" required></div>
+            <div class="form-group"><input type="tel" id="phone" placeholder="Nomor WhatsApp" required></div>
+            <div class="form-group"><input type="date" id="weddingDate" placeholder="Tanggal Pernikahan" required></div>
+            <div class="form-group"><input type="number" id="guestCount" placeholder="Jumlah Tamu" required></div>
+            <div class="form-group"><textarea id="message" rows="3" placeholder="Pesan atau permintaan khusus..."></textarea></div>
+            <button type="submit" class="btn btn-primary">Kirim Permintaan Booking</button>
+        </form>
+    </div>
+</div>
+
+<!-- Custom Alert -->
+<div id="customAlert">
+    <i class="fas fa-check-circle"></i>
+    <h3>Terima Kasih!</h3>
+    <p>Permintaan booking Anda telah terkirim. Kami akan segera menghubungi Anda via WhatsApp.</p>
+    <button onclick="closeCustomAlert()">Oke</button>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section"><h4>Jadi Tenang</h4><p>Wedding organizer profesional yang siap mewujudkan hari spesial Anda tanpa stres.</p></div>
+            <div class="footer-section"><h4>Kontak Kami</h4><p><i class="fas fa-phone"></i> +62 812 3456 7890</p><p><i class="fas fa-envelope"></i> hello@jaditenang.com</p></div>
+            <div class="footer-section"><h4>Jam Operasional</h4><p>Senin - Sabtu: 09.00 - 18.00</p><p>Minggu: Konsultasi via WA</p></div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2024 Jadi Tenang Wedding Organizer. All Rights Reserved.</p></div>
+    </div>
+</footer>
+
+<div class="whatsapp-float">
+    <a href="https://wa.me/6281234567890?text=Halo%20Jadi%20Tenang,%20saya%20ingin%20konsultasi" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="js/main.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true, offset: 100 });
+
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) navbar.classList.add('scrolled');
+        else navbar.classList.remove('scrolled');
+    });
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('active'));
+        });
+    }
+
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.querySelector('.faq-question').addEventListener('click', () => item.classList.toggle('active'));
+    });
+
+    // ==================== KIRIM KE WHATSAPP ====================
+    // 🔴 GANTI NOMOR INI DENGAN NOMOR WHATSAPP KAMU 🔴
+    const ADMIN_WHATSAPP = '081290156531';
+
+    function sendBooking(event) {
+        event.preventDefault();
+        
+        const packageName = document.getElementById('selectedPackage').innerText;
+        const fullName = document.getElementById('fullName').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const weddingDate = document.getElementById('weddingDate').value;
+        const guestCount = document.getElementById('guestCount').value;
+        const message = document.getElementById('message').value;
+        
+        let formattedDate = weddingDate;
+        if (weddingDate) {
+            const date = new Date(weddingDate);
+            formattedDate = date.toLocaleDateString('id-ID');
+        }
+        
+        const whatsappMessage = `*📋 DATA BOOKING PERNIKAHAN*%0A%0A📦 *Paket:* ${packageName}%0A👤 *Nama:* ${fullName}%0A📧 *Email:* ${email}%0A📱 *WhatsApp:* ${phone}%0A📅 *Tanggal Pernikahan:* ${formattedDate}%0A👥 *Jumlah Tamu:* ${guestCount}%0A💬 *Pesan:* ${message || '-'}%0A%0A_Silahkan hubungi customer untuk konfirmasi booking._`;
+        
+        const whatsappUrl = `https://wa.me/${ADMIN_WHATSAPP}?text=${whatsappMessage}`;
+        
+        showCustomAlert();
+        document.getElementById('packageBookingForm').reset();
+        
+        setTimeout(() => {
+            closePackageModal();
+        }, 1000);
+        
+        setTimeout(() => {
+            window.open(whatsappUrl, '_blank');
+        }, 500);
+    }
+    
+    function showCustomAlert() {
+        document.getElementById('customAlert').style.display = 'block';
+    }
+    
+    function closeCustomAlert() {
+        document.getElementById('customAlert').style.display = 'none';
+    }
+    
+    function openPackageModal(packageName) {
+        document.getElementById('selectedPackage').innerText = packageName;
+        document.getElementById('packageModal').classList.add('active');
+    }
+    
+    function closePackageModal() {
+        document.getElementById('packageModal').classList.remove('active');
+    }
+    
+    window.addEventListener('click', (e) => {
+        const modal = document.getElementById('packageModal');
+        if (e.target === modal) closePackageModal();
+    });
+    
+    window.openPackageModal = openPackageModal;
+    window.closePackageModal = closePackageModal;
+    window.sendBooking = sendBooking;
+    window.showCustomAlert = showCustomAlert;
+    window.closeCustomAlert = closeCustomAlert;
+</script>
+</body>
+</html>

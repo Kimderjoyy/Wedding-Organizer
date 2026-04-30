@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio & Galeri - Jadi Tenang Wedding Organizer</title>
+    <meta name="description" content="Lihat hasil karya Jadi Tenang Wedding Organizer. Galeri foto dan video pernikahan terbaru dari klien kami.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Page Header dengan Video Background */
+        .page-header {
+            position: relative;
+            padding: 8rem 0 4rem;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 1;
+        }
+
+        .page-header .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .page-header h1 span {
+            color: var(--secondary);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            color: white;
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            padding: 5rem 0;
+        }
+        
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--primary);
+            background: transparent;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+            color: white;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-overlay h3 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .gallery-overlay p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+        
+        .video-showcase {
+            padding: 5rem 0;
+            background: var(--off-white);
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .video-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .video-thumbnail img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .video-card:hover .video-thumbnail img {
+            transform: scale(1.05);
+        }
+        
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(45, 106, 79, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .video-thumbnail:hover .play-btn {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: var(--primary);
+        }
+        
+        .video-card h3 {
+            padding: 1rem;
+            font-size: 1rem;
+            text-align: center;
+            color: var(--primary);
+        }
+        
+        .load-more {
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 85%;
+            border-radius: 10px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        
+        .lightbox-close:hover {
+            color: var(--secondary);
+        }
+        
+        .lightbox-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            font-size: 1rem;
+            background: rgba(0,0,0,0.5);
+            padding: 0.8rem;
+        }
+        
+        /* Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .video-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .video-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .video-modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+        
+        .video-modal-close:hover {
+            background: rgba(255,255,255,0.4);
+            transform: scale(1.1);
+        }
+        
+        .video-modal-body {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        
+        .video-modal-body video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .video-modal-body iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-modal-title {
+            padding: 1rem;
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            font-size: 1rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title span {
+            color: var(--primary);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+        
+        .btn-outline {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            background: transparent;
+            cursor: pointer;
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--white);
+        }
+        
+        .cta-section .btn-outline {
+            border-color: white;
+            color: white;
+        }
+        
+        .cta-section .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* Logo */
+        .logo-img {
+            height: 70px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+        
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .page-header p {
+                font-size: 1rem;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            .play-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+            .logo-img {
+                height: 45px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            .logo-img {
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <a href="index.html">
+                <img src="asset/logo2.png" alt="Jadi Tenang Wedding Organizer" class="logo-img">
+            </a>
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="about.html">Tentang</a></li>
+            <li><a href="packages.html">Paket</a></li>
+            <li><a href="portfolio.html" class="active">Portfolio</a></li>
+            <li><a href="contact.html">Kontak</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Page Header dengan Video Background -->
+<section class="page-header">
+    <video class="header-video" autoplay loop muted playsinline>
+        <source src="asset/video/dekorasi.mp4" type="video/mp4">
+    </video>
+    <div class="header-overlay"></div>
+    <div class="container">
+        <h1 data-aos="fade-up">Galeri <span>Inspirasi</span></h1>
+        <p data-aos="fade-up" data-aos-delay="100">Momen-momen membahagiakan dari klien kami</p>
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery-section">
+    <div class="container">
+        <div class="gallery-filters" data-aos="fade-up">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <button class="filter-btn" data-filter="akad">Akad Nikah</button>
+            <button class="filter-btn" data-filter="resepsi">Resepsi</button>
+            <button class="filter-btn" data-filter="dekorasi">Dekorasi</button>
+            <button class="filter-btn" data-filter="prewed">Pre-wedding</button>
+        </div>
+        
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Gallery items akan diisi oleh JavaScript -->
+        </div>
+        
+        <div class="load-more" data-aos="fade-up">
+            <button class="btn-outline" id="loadMoreBtn">Muat Lebih Banyak</button>
+        </div>
+    </div>
+</section>
+
+<!-- Video Showcase -->
+<section class="video-showcase">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Video <span>Highlight</span></h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Cuplikan momen terbaik dari pernikahan klien kami</p>
+        <div class="video-grid" id="videoGrid" data-aos="fade-up" data-aos-delay="200">
+            <!-- Video items akan diisi oleh JavaScript -->
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<div class="cta-section">
+    <div class="container">
+        <h2 data-aos="zoom-in">Inspirasi untuk Pernikahan Anda?</h2>
+        <p data-aos="zoom-in" data-aos-delay="100">Konsultasikan konsep impian Anda dengan tim kami!</p>
+        <a href="contact.html" class="btn-outline" data-aos="zoom-in" data-aos-delay="200">Hubungi Kami <i class="fas fa-heart"></i></a>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Jadi Tenang</h4>
+                <p>Wedding organizer profesional yang siap mewujudkan hari spesial Anda tanpa stres.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Kontak</h4>
+                <p><i class="fas fa-phone"></i> +62 812 3456 7890</p>
+                <p><i class="fas fa-envelope"></i> hello@jaditenang.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</p>
+            </div>
+            <div class="footer-section">
+                <h4>Jam Operasional</h4>
+                <p>Senin - Sabtu: 09.00 - 18.00</p>
+                <p>Minggu: Konsultasi via WA</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">Tentang Kami</a></li>
+                    <li><a href="packages.html">Paket Pernikahan</a></li>
+                    <li><a href="portfolio.html">Galeri</a></li>
+                    <li><a href="contact.html">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Jadi Tenang Wedding Organizer. Semua hak dilindungi.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<div class="whatsapp-float">
+    <a href="https://wa.link/kjbtgk" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
+
+<!-- Lightbox Modal untuk Foto -->
+<div id="lightbox" class="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img class="lightbox-img" src="">
+    <div class="lightbox-caption"></div>
+</div>
+
+<!-- Video Modal -->
+<div id="videoModal" class="video-modal">
+    <div class="video-modal-content">
+        <div class="video-modal-close" onclick="closeVideoModal()">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="video-modal-body" id="videoModalBody">
+            <!-- Video akan dimasukkan di sini -->
+        </div>
+        <div class="video-modal-title" id="videoModalTitle">
+            Video Highlight
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+    // Inisialisasi AOS
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        });
+    });
+
+    // ========== DATA GALERI FOTO ==========
+    const galleryItems = [
+        { category: 'akad', img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=500', title: 'Akad Nikah di Masjid', desc: 'Dekorasi minimalis elegan' },
+        { category: 'akad', img: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500', title: 'Prosesi Akad Adat Sunda', desc: 'Dengan busana tradisional' },
+        { category: 'resepsi', img: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500', title: 'Resepsi Outdoor', desc: 'Taman dengan nuansa rustic' },
+        { category: 'resepsi', img: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500', title: 'Resepsi Mewah', desc: 'Dekorasi gold & putih' },
+        { category: 'dekorasi', img: 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=500', title: 'Dekorasi Minimalis', desc: 'Konsep simple elegan' },
+        { category: 'dekorasi', img: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=500', title: 'Dekorasi Bunga', desc: 'Rangkaian bunga segar' },
+        { category: 'prewed', img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=500', title: 'Pre-wedding Beach', desc: 'Pantai dengan sunset' },
+        { category: 'prewed', img: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500', title: 'Pre-wedding Forest', desc: 'Nuansa alam yang romantis' },
+        { category: 'resepsi', img: 'https://images.unsplash.com/photo-1583939172811-8f6e8b7c6b3c?w=500', title: 'Wedding Party', desc: 'Pesta meriah dengan live music' },
+        { category: 'dekorasi', img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=500', title: 'Pelaminan Mewah', desc: 'Desain pelaminan premium' }
+    ];
+
+    // ========== DATA VIDEO ==========
+    const videoItems = [
+        {
+            thumbnail: 'asset/1.jpg',
+            title: 'Andini & Bagas - Wedding Highlight',
+            videoUrl: 'asset/video/1.mp4',
+            videoType: 'local'
+        },
+        {
+            thumbnail: 'asset/2.jpg',
+            title: 'Citra & Dito - Prewedding Journey',
+            videoUrl: 'asset/video/2.mp4',
+            videoType: 'local'
+        },
+        {
+            thumbnail: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=500',
+            title: 'Sarah & Rizki - Wedding Cinematic',
+            videoUrl: 'asset/video/3.mp4',
+            videoType: 'local'
+        }
+    ];
+
+    // ========== RENDER GALERI FOTO ==========
+    let currentItemCount = 6;
+    const galleryGrid = document.getElementById('galleryGrid');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+    function renderGallery() {
+        const itemsToShow = galleryItems.slice(0, currentItemCount);
+        galleryGrid.innerHTML = itemsToShow.map(item => `
+            <div class="gallery-item" data-category="${item.category}">
+                <img src="${item.img}" alt="${item.title}">
+                <div class="gallery-overlay">
+                    <h3>${item.title}</h3>
+                    <p>${item.desc}</p>
+                </div>
+            </div>
+        `).join('');
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                const title = item.querySelector('h3').textContent;
+                openLightbox(img.src, title);
+            });
+        });
+    }
+
+    // ========== RENDER VIDEO ==========
+    function renderVideos() {
+        const videoGrid = document.getElementById('videoGrid');
+        if (!videoGrid) return;
+        
+        videoGrid.innerHTML = videoItems.map((video, index) => `
+            <div class="video-card" data-video-index="${index}">
+                <div class="video-thumbnail">
+                    <img src="${video.thumbnail}" alt="${video.title}">
+                    <div class="play-btn">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <h3>${video.title}</h3>
+            </div>
+        `).join('');
+
+        document.querySelectorAll('.video-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const index = parseInt(card.dataset.videoIndex);
+                openVideoModal(index);
+            });
+        });
+    }
+
+    // ========== VIDEO MODAL FUNCTIONS ==========
+    function openVideoModal(index) {
+        const video = videoItems[index];
+        if (!video) return;
+        
+        const modal = document.getElementById('videoModal');
+        const modalBody = document.getElementById('videoModalBody');
+        const modalTitle = document.getElementById('videoModalTitle');
+        
+        modalTitle.textContent = video.title;
+        
+        let videoHtml = '';
+        if (video.videoType === 'youtube') {
+            let videoId = video.videoUrl;
+            if (video.videoUrl.includes('youtu.be')) {
+                videoId = video.videoUrl.split('/').pop();
+            } else if (video.videoUrl.includes('watch?v=')) {
+                videoId = video.videoUrl.split('v=')[1].split('&')[0];
+            }
+            videoHtml = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        } else {
+            videoHtml = `<video controls autoplay>
+                            <source src="${video.videoUrl}" type="video/mp4">
+                            Browser Anda tidak mendukung video tag.
+                        </video>`;
+        }
+        
+        modalBody.innerHTML = videoHtml;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+        const modal = document.getElementById('videoModal');
+        const modalBody = document.getElementById('videoModalBody');
+        modal.classList.remove('active');
+        modalBody.innerHTML = '';
+        document.body.style.overflow = 'auto';
+    }
+
+    // ========== LIGHTBOX FUNCTIONS ==========
+    function openLightbox(src, title) {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.add('active');
+        lightbox.querySelector('.lightbox-img').src = src;
+        lightbox.querySelector('.lightbox-caption').textContent = title;
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    // ========== FILTER GALERI ==========
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    let currentFilter = 'all';
+
+    function filterGallery() {
+        const items = document.querySelectorAll('.gallery-item');
+        items.forEach(item => {
+            if (currentFilter === 'all' || item.dataset.category === currentFilter) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    if (filterBtns.length) {
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                filterGallery();
+            });
+        });
+    }
+
+    // ========== LOAD MORE ==========
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            if (currentItemCount >= galleryItems.length) {
+                loadMoreBtn.style.display = 'none';
+                return;
+            }
+            currentItemCount += 3;
+            renderGallery();
+            filterGallery();
+        });
+    }
+
+    // ========== TUTUP MODAL KLIK DI LUAR ==========
+    window.onclick = function(event) {
+        const lightbox = document.getElementById('lightbox');
+        if (event.target === lightbox) {
+            closeLightbox();
+        }
+        const videoModal = document.getElementById('videoModal');
+        if (event.target === videoModal) {
+            closeVideoModal();
+        }
+    }
+
+    // ========== ESCAPE KEY UNTUK TUTUP MODAL ==========
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+            closeVideoModal();
+        }
+    });
+
+    // ========== INITIAL RENDER ==========
+    renderGallery();
+    renderVideos();
+</script>
+
+</body>
+</html>

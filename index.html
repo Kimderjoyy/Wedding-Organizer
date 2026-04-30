@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadi Tenang - Wedding Organizer | Home</title>
+    <meta name="description" content="Wedding organizer profesional siap wujudkan pernikahan impian Anda tanpa stres. Paket lengkap dengan harga terjangkau.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Why Us Slider Styles */
+        .why-us {
+            padding: 5rem 0;
+            background: #f5f7f5;
+        }
+        
+        .why-us-slider-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .why-us-slider-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .why-us-slide {
+            min-width: 100%;
+            position: relative;
+            aspect-ratio: 16 / 9;
+        }
+        
+        .why-us-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .why-us-slide .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .why-us-slide .slide-caption h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .why-us-slide .slide-caption p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .slider-btn-why {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .slider-btn-why:hover {
+            background: #2d6a4f;
+        }
+        
+        .slider-btn-why.prev {
+            left: 15px;
+        }
+        
+        .slider-btn-why.next {
+            right: 15px;
+        }
+        
+        .slider-dots-why {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .dot-why {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .dot-why.active {
+            background: #e4bc5c;
+            width: 25px;
+            border-radius: 10px;
+        }
+        
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .why-us-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .why-us-content h2 span {
+            color: #2d6a4f;
+        }
+        
+        .reason {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .reason i {
+            font-size: 1.5rem;
+            color: #2d6a4f;
+            margin-top: 0.2rem;
+        }
+        
+        .reason h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .reason p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .why-us-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .why-us-content h2 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+            .slider-btn-why {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <a href="index.html">
+                <img src="asset/logo2.png" alt="Jadi Tenang Wedding Organizer" class="logo-img">
+            </a>
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html" class="active">Beranda</a></li>
+            <li><a href="about.html">Tentang</a></li>
+            <li><a href="packages.html">Paket</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Kontak</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <video class="hero-video" autoplay loop muted playsinline>
+        <source src="asset/video/2.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 data-aos="fade-up">Rencanakan Pernikahan <span>Tanpa Stres</span></h1>
+        <p data-aos="fade-up" data-aos-delay="100">Kami wujudkan hari spesialmu dengan sempurna. Dari persiapan hingga acara selesai, semua jadi tenang.</p>
+        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="200">
+            <a href="packages.html" class="btn btn-primary">Lihat Paket <i class="fas fa-arrow-right"></i></a>
+            <a href="contact.html" class="btn btn-outline">Konsultasi Gratis</a>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item" data-aos="fade-up">
+                <div class="stat-number" data-count="500">0</div>
+                <div class="stat-label">+ Pasangan Bahagia</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-number" data-count="8">0</div>
+                <div class="stat-label">Tahun Pengalaman</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-number" data-count="150">0</div>
+                <div class="stat-label">+ Venue Kerjasama</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-number" data-count="100">0</div>
+                <div class="stat-label">% Kepuasan Klien</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Preview -->
+<section class="services-preview">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Layanan Kami</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Kami siap membantu setiap detail pernikahan Anda</p>
+        <div class="services-grid">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-icon"><i class="fas fa-calendar-check"></i></div>
+                <h3>Perencanaan</h3>
+                <p>Konsep, timeline, dan koordinasi semua vendor untuk pernikahan impian Anda.</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-icon"><i class="fas fa-palette"></i></div>
+                <h3>Dekorasi</h3>
+                <p>Desain dekorasi elegan sesuai tema dan budget yang Anda inginkan.</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="service-icon"><i class="fas fa-camera"></i></div>
+                <h3>Dokumentasi</h3>
+                <p>Foto & video profesional untuk mengabadikan momen terindah Anda.</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="service-icon"><i class="fas fa-utensils"></i></div>
+                <h3>Catering</h3>
+                <p>Menu lezat dengan pilihan hidangan tradisional hingga internasional.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us - Dengan Slider 5 Foto -->
+<section class="why-us">
+    <div class="container">
+        <div class="why-us-grid">
+            <div class="why-us-content" data-aos="fade-right">
+                <h2>Kenapa Memilih <span>Jadi Tenang?</span></h2>
+                <div class="reason">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <h4>Pengalaman 8+ Tahun</h4>
+                        <p>Telah menangani ratusan pernikahan dengan berbagai skala dan konsep.</p>
+                    </div>
+                </div>
+                <div class="reason">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <h4>Tim Profesional</h4>
+                        <p>Didukung oleh vendor terpercaya dan tim yang berpengalaman di bidangnya.</p>
+                    </div>
+                </div>
+                <div class="reason">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <h4>Harga Transparan</h4>
+                        <p>Tidak ada biaya tersembunyi. Semua sesuai kesepakatan di awal.</p>
+                    </div>
+                </div>
+                <div class="reason">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <h4>Garansi Kepuasan</h4>
+                        <p>Kami pastikan acara berjalan lancar atau uang kembali*.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slider Foto (5 Foto yang bisa digeser) -->
+            <div class="why-us-slider-wrapper" data-aos="fade-left">
+                <div class="why-us-slider-container" id="whyUsSlider">
+                    <div class="why-us-slide">
+                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600" alt="Pernikahan Mewah 1">
+                        <div class="slide-caption">
+                            <h3>Pernikahan Mewah</h3>
+                            <p>Dekorasi elegan dengan tema classic gold</p>
+                        </div>
+                    </div>
+                    <div class="why-us-slide">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600" alt="Pernikahan Outdoor">
+                        <div class="slide-caption">
+                            <h3>Pernikahan Outdoor</h3>
+                            <p>Suasana romantis di taman dengan dekorasi botanical</p>
+                        </div>
+                    </div>
+                    <div class="why-us-slide">
+                        <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=600" alt="Pernikahan Tradisional">
+                        <div class="slide-caption">
+                            <h3>Pernikahan Adat</h3>
+                            <p>Pelestarian budaya dengan sentuhan modern</p>
+                        </div>
+                    </div>
+                    <div class="why-us-slide">
+                        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600" alt="Resepsi Mewah">
+                        <div class="slide-caption">
+                            <h3>Resepsi Mewah</h3>
+                            <p>Ballroom megah dengan 500+ tamu undangan</p>
+                        </div>
+                    </div>
+                    <div class="why-us-slide">
+                        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600" alt="Dekorasi Bunga">
+                        <div class="slide-caption">
+                            <h3>Dekorasi Bunga</h3>
+                            <p>Rangkaian bunga segar yang memukau</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="slider-btn-why prev" id="whyUsPrev"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn-why next" id="whyUsNext"><i class="fas fa-chevron-right"></i></button>
+                <div class="slider-dots-why" id="whyUsDots"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Preview -->
+<section class="testimonials-preview">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Apa Kata Mereka?</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Kepercayaan dari pasangan bahagia</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Benar-benar membuat kami jadi tenang! Semua urusan pernikahan diurus dengan sangat profesional. Terima kasih Jadi Tenang!"</p>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Client">
+                    <div class="author-info">
+                        <h4>Sarah & Andi</h4>
+                        <p>Menikah, 15 Maret 2024</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Pelayanan luar biasa, dekorasi sesuai keinginan, dan semua berjalan lancar. Harga juga worth it banget!"</p>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Client">
+                    <div class="author-info">
+                        <h4>Rina & Budi</h4>
+                        <p>Menikah, 22 Juni 2024</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Tim Jadi Tenang sangat komunikatif dan sigap. Pernikahan impian kami terwujud sempurna!"</p>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Client">
+                    <div class="author-info">
+                        <h4>Dinda & Rizki</h4>
+                        <p>Menikah, 10 Oktober 2024</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<div class="cta-section">
+    <div class="container">
+        <h2 data-aos="zoom-in">Siap Mewujudkan Pernikahan Impian?</h2>
+        <p data-aos="zoom-in" data-aos-delay="100">Konsultasikan rencana pernikahan Anda dengan tim profesional kami secara gratis!</p>
+        <a href="contact.html" class="btn btn-outline" data-aos="zoom-in" data-aos-delay="200">Hubungi Kami Sekarang <i class="fas fa-heart"></i></a>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Jadi Tenang</h4>
+                <p>Wedding organizer profesional yang siap mewujudkan hari spesial Anda tanpa stres.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Kontak</h4>
+                <p><i class="fas fa-phone"></i> +62 812 3456 7890</p>
+                <p><i class="fas fa-envelope"></i> hello@jaditenang.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</p>
+            </div>
+            <div class="footer-section">
+                <h4>Jam Operasional</h4>
+                <p>Senin - Sabtu: 09.00 - 18.00</p>
+                <p>Minggu: Konsultasi via WA</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">Tentang Kami</a></li>
+                    <li><a href="packages.html">Paket Pernikahan</a></li>
+                    <li><a href="portfolio.html">Galeri</a></li>
+                    <li><a href="contact.html">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Jadi Tenang Wedding Organizer. Semua hak dilindungi.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<div class="whatsapp-float">
+    <a href="https://wa.link/kjbtgk" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    // Initialize AOS
+    AOS.init({ duration: 1000, once: true, offset: 100 });
+    
+    // ==================== WHY US SLIDER ====================
+    (function() {
+        const sliderContainer = document.getElementById('whyUsSlider');
+        const prevBtn = document.getElementById('whyUsPrev');
+        const nextBtn = document.getElementById('whyUsNext');
+        const dotsContainer = document.getElementById('whyUsDots');
+        
+        if (!sliderContainer) return;
+        
+        let slides = document.querySelectorAll('.why-us-slide');
+        let currentIndex = 0;
+        let slideInterval;
+        const intervalTime = 5000;
+        
+        function updateSlides() {
+            sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+            document.querySelectorAll('.dot-why').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+        
+        function createDots() {
+            if (!dotsContainer) return;
+            dotsContainer.innerHTML = '';
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot-why');
+                if (index === currentIndex) dot.classList.add('active');
+                dot.addEventListener('click', function() {
+                    currentIndex = index;
+                    updateSlides();
+                    resetAutoSlide();
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
+        
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlides();
+        }
+        
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlides();
+        }
+        
+        function startAutoSlide() {
+            if (slideInterval) clearInterval(slideInterval);
+            if (slides.length > 1) {
+                slideInterval = setInterval(nextSlide, intervalTime);
+            }
+        }
+        
+        function resetAutoSlide() {
+            if (slideInterval) clearInterval(slideInterval);
+            startAutoSlide();
+        }
+        
+        if (prevBtn) prevBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            prevSlide();
+            resetAutoSlide();
+        });
+        
+        if (nextBtn) nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            nextSlide();
+            resetAutoSlide();
+        });
+        
+        // Touch swipe untuk HP
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        sliderContainer.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        
+        sliderContainer.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+                resetAutoSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+                resetAutoSlide();
+            }
+        });
+        
+        createDots();
+        startAutoSlide();
+        
+        // Hover pause
+        const sliderWrapper = document.querySelector('.why-us-slider-wrapper');
+        if (sliderWrapper) {
+            sliderWrapper.addEventListener('mouseenter', function() {
+                if (slideInterval) clearInterval(slideInterval);
+            });
+            sliderWrapper.addEventListener('mouseleave', function() {
+                startAutoSlide();
+            });
+        }
+    })();
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) navbar.classList.add('scrolled');
+        else navbar.classList.remove('scrolled');
+    });
+    
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+        document.querySelectorAll('.nav-links a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+            });
+        });
+    }
+    
+    // Counter animation
+    const statNumbers = document.querySelectorAll('.stat-number');
+    const observerStats = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const target = parseInt(el.getAttribute('data-count'));
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(function() {
+                    current += increment;
+                    if (current >= target) {
+                        el.innerText = target;
+                        clearInterval(timer);
+                    } else {
+                        el.innerText = Math.floor(current);
+                    }
+                }, 20);
+                observerStats.unobserve(el);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    statNumbers.forEach(function(num) {
+        observerStats.observe(num);
+    });
+</script>
+</body>
+</html>
